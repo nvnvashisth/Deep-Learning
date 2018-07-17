@@ -1,0 +1,1263 @@
+
+% Default to the notebook output style
+
+    
+
+
+% Inherit from the specified cell style.
+
+
+
+
+    
+\documentclass[11pt]{article}
+
+    
+    
+    \usepackage[T1]{fontenc}
+    % Nicer default font (+ math font) than Computer Modern for most use cases
+    \usepackage{mathpazo}
+
+    % Basic figure setup, for now with no caption control since it's done
+    % automatically by Pandoc (which extracts ![](path) syntax from Markdown).
+    \usepackage{graphicx}
+    % We will generate all images so they have a width \maxwidth. This means
+    % that they will get their normal width if they fit onto the page, but
+    % are scaled down if they would overflow the margins.
+    \makeatletter
+    \def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth
+    \else\Gin@nat@width\fi}
+    \makeatother
+    \let\Oldincludegraphics\includegraphics
+    % Set max figure width to be 80% of text width, for now hardcoded.
+    \renewcommand{\includegraphics}[1]{\Oldincludegraphics[width=.8\maxwidth]{#1}}
+    % Ensure that by default, figures have no caption (until we provide a
+    % proper Figure object with a Caption API and a way to capture that
+    % in the conversion process - todo).
+    \usepackage{caption}
+    \DeclareCaptionLabelFormat{nolabel}{}
+    \captionsetup{labelformat=nolabel}
+
+    \usepackage{adjustbox} % Used to constrain images to a maximum size 
+    \usepackage{xcolor} % Allow colors to be defined
+    \usepackage{enumerate} % Needed for markdown enumerations to work
+    \usepackage{geometry} % Used to adjust the document margins
+    \usepackage{amsmath} % Equations
+    \usepackage{amssymb} % Equations
+    \usepackage{textcomp} % defines textquotesingle
+    % Hack from http://tex.stackexchange.com/a/47451/13684:
+    \AtBeginDocument{%
+        \def\PYZsq{\textquotesingle}% Upright quotes in Pygmentized code
+    }
+    \usepackage{upquote} % Upright quotes for verbatim code
+    \usepackage{eurosym} % defines \euro
+    \usepackage[mathletters]{ucs} % Extended unicode (utf-8) support
+    \usepackage[utf8x]{inputenc} % Allow utf-8 characters in the tex document
+    \usepackage{fancyvrb} % verbatim replacement that allows latex
+    \usepackage{grffile} % extends the file name processing of package graphics 
+                         % to support a larger range 
+    % The hyperref package gives us a pdf with properly built
+    % internal navigation ('pdf bookmarks' for the table of contents,
+    % internal cross-reference links, web links for URLs, etc.)
+    \usepackage{hyperref}
+    \usepackage{longtable} % longtable support required by pandoc >1.10
+    \usepackage{booktabs}  % table support for pandoc > 1.12.2
+    \usepackage[inline]{enumitem} % IRkernel/repr support (it uses the enumerate* environment)
+    \usepackage[normalem]{ulem} % ulem is needed to support strikethroughs (\sout)
+                                % normalem makes italics be italics, not underlines
+    
+
+    
+    
+    % Colors for the hyperref package
+    \definecolor{urlcolor}{rgb}{0,.145,.698}
+    \definecolor{linkcolor}{rgb}{.71,0.21,0.01}
+    \definecolor{citecolor}{rgb}{.12,.54,.11}
+
+    % ANSI colors
+    \definecolor{ansi-black}{HTML}{3E424D}
+    \definecolor{ansi-black-intense}{HTML}{282C36}
+    \definecolor{ansi-red}{HTML}{E75C58}
+    \definecolor{ansi-red-intense}{HTML}{B22B31}
+    \definecolor{ansi-green}{HTML}{00A250}
+    \definecolor{ansi-green-intense}{HTML}{007427}
+    \definecolor{ansi-yellow}{HTML}{DDB62B}
+    \definecolor{ansi-yellow-intense}{HTML}{B27D12}
+    \definecolor{ansi-blue}{HTML}{208FFB}
+    \definecolor{ansi-blue-intense}{HTML}{0065CA}
+    \definecolor{ansi-magenta}{HTML}{D160C4}
+    \definecolor{ansi-magenta-intense}{HTML}{A03196}
+    \definecolor{ansi-cyan}{HTML}{60C6C8}
+    \definecolor{ansi-cyan-intense}{HTML}{258F8F}
+    \definecolor{ansi-white}{HTML}{C5C1B4}
+    \definecolor{ansi-white-intense}{HTML}{A1A6B2}
+
+    % commands and environments needed by pandoc snippets
+    % extracted from the output of `pandoc -s`
+    \providecommand{\tightlist}{%
+      \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+    \DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+    % Add ',fontsize=\small' for more characters per line
+    \newenvironment{Shaded}{}{}
+    \newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.56,0.13,0.00}{{#1}}}
+    \newcommand{\DecValTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\FloatTok}[1]{\textcolor[rgb]{0.25,0.63,0.44}{{#1}}}
+    \newcommand{\CharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\StringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\CommentTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textit{{#1}}}}
+    \newcommand{\OtherTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{{#1}}}
+    \newcommand{\AlertTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.02,0.16,0.49}{{#1}}}
+    \newcommand{\RegionMarkerTok}[1]{{#1}}
+    \newcommand{\ErrorTok}[1]{\textcolor[rgb]{1.00,0.00,0.00}{\textbf{{#1}}}}
+    \newcommand{\NormalTok}[1]{{#1}}
+    
+    % Additional commands for more recent versions of Pandoc
+    \newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.53,0.00,0.00}{{#1}}}
+    \newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.25,0.44,0.63}{{#1}}}
+    \newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.73,0.40,0.53}{{#1}}}
+    \newcommand{\ImportTok}[1]{{#1}}
+    \newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.73,0.13,0.13}{\textit{{#1}}}}
+    \newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\VariableTok}[1]{\textcolor[rgb]{0.10,0.09,0.49}{{#1}}}
+    \newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.00,0.44,0.13}{\textbf{{#1}}}}
+    \newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.40,0.40,0.40}{{#1}}}
+    \newcommand{\BuiltInTok}[1]{{#1}}
+    \newcommand{\ExtensionTok}[1]{{#1}}
+    \newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.74,0.48,0.00}{{#1}}}
+    \newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.49,0.56,0.16}{{#1}}}
+    \newcommand{\InformationTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    \newcommand{\WarningTok}[1]{\textcolor[rgb]{0.38,0.63,0.69}{\textbf{\textit{{#1}}}}}
+    
+    
+    % Define a nice break command that doesn't care if a line doesn't already
+    % exist.
+    \def\br{\hspace*{\fill} \\* }
+    % Math Jax compatability definitions
+    \def\gt{>}
+    \def\lt{<}
+    % Document parameters
+    \title{1\_classification\_cnn}
+    
+    
+    
+
+    % Pygments definitions
+    
+\makeatletter
+\def\PY@reset{\let\PY@it=\relax \let\PY@bf=\relax%
+    \let\PY@ul=\relax \let\PY@tc=\relax%
+    \let\PY@bc=\relax \let\PY@ff=\relax}
+\def\PY@tok#1{\csname PY@tok@#1\endcsname}
+\def\PY@toks#1+{\ifx\relax#1\empty\else%
+    \PY@tok{#1}\expandafter\PY@toks\fi}
+\def\PY@do#1{\PY@bc{\PY@tc{\PY@ul{%
+    \PY@it{\PY@bf{\PY@ff{#1}}}}}}}
+\def\PY#1#2{\PY@reset\PY@toks#1+\relax+\PY@do{#2}}
+
+\expandafter\def\csname PY@tok@w\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.73,0.73}{##1}}}
+\expandafter\def\csname PY@tok@c\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.74,0.48,0.00}{##1}}}
+\expandafter\def\csname PY@tok@k\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.69,0.00,0.25}{##1}}}
+\expandafter\def\csname PY@tok@o\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ow\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@nn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@ne\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.82,0.25,0.23}{##1}}}
+\expandafter\def\csname PY@tok@nv\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@no\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ni\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.60,0.60,0.60}{##1}}}
+\expandafter\def\csname PY@tok@na\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.49,0.56,0.16}{##1}}}
+\expandafter\def\csname PY@tok@nt\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@nd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.67,0.13,1.00}{##1}}}
+\expandafter\def\csname PY@tok@s\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sd\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@si\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@se\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sr\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.40,0.53}{##1}}}
+\expandafter\def\csname PY@tok@ss\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sx\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@m\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@gh\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gu\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.50,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@gd\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.63,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.63,0.00}{##1}}}
+\expandafter\def\csname PY@tok@gr\endcsname{\def\PY@tc##1{\textcolor[rgb]{1.00,0.00,0.00}{##1}}}
+\expandafter\def\csname PY@tok@ge\endcsname{\let\PY@it=\textit}
+\expandafter\def\csname PY@tok@gs\endcsname{\let\PY@bf=\textbf}
+\expandafter\def\csname PY@tok@gp\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,0.50}{##1}}}
+\expandafter\def\csname PY@tok@go\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.53,0.53,0.53}{##1}}}
+\expandafter\def\csname PY@tok@gt\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.27,0.87}{##1}}}
+\expandafter\def\csname PY@tok@err\endcsname{\def\PY@bc##1{\setlength{\fboxsep}{0pt}\fcolorbox[rgb]{1.00,0.00,0.00}{1,1,1}{\strut ##1}}}
+\expandafter\def\csname PY@tok@kc\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kd\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kn\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@kr\endcsname{\let\PY@bf=\textbf\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@bp\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.50,0.00}{##1}}}
+\expandafter\def\csname PY@tok@fm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.00,0.00,1.00}{##1}}}
+\expandafter\def\csname PY@tok@vc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vg\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@vm\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.10,0.09,0.49}{##1}}}
+\expandafter\def\csname PY@tok@sa\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sc\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@dl\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s2\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@sh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@s1\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.73,0.13,0.13}{##1}}}
+\expandafter\def\csname PY@tok@mb\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mf\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mh\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mi\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@il\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@mo\endcsname{\def\PY@tc##1{\textcolor[rgb]{0.40,0.40,0.40}{##1}}}
+\expandafter\def\csname PY@tok@ch\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cm\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cpf\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@c1\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+\expandafter\def\csname PY@tok@cs\endcsname{\let\PY@it=\textit\def\PY@tc##1{\textcolor[rgb]{0.25,0.50,0.50}{##1}}}
+
+\def\PYZbs{\char`\\}
+\def\PYZus{\char`\_}
+\def\PYZob{\char`\{}
+\def\PYZcb{\char`\}}
+\def\PYZca{\char`\^}
+\def\PYZam{\char`\&}
+\def\PYZlt{\char`\<}
+\def\PYZgt{\char`\>}
+\def\PYZsh{\char`\#}
+\def\PYZpc{\char`\%}
+\def\PYZdl{\char`\$}
+\def\PYZhy{\char`\-}
+\def\PYZsq{\char`\'}
+\def\PYZdq{\char`\"}
+\def\PYZti{\char`\~}
+% for compatibility with earlier versions
+\def\PYZat{@}
+\def\PYZlb{[}
+\def\PYZrb{]}
+\makeatother
+
+
+    % Exact colors from NB
+    \definecolor{incolor}{rgb}{0.0, 0.0, 0.5}
+    \definecolor{outcolor}{rgb}{0.545, 0.0, 0.0}
+
+
+
+    
+    % Prevent overflowing lines due to hard-to-break entities
+    \sloppy 
+    % Setup hyperref package
+    \hypersetup{
+      breaklinks=true,  % so long urls are correctly broken across lines
+      colorlinks=true,
+      urlcolor=urlcolor,
+      linkcolor=linkcolor,
+      citecolor=citecolor,
+      }
+    % Slightly bigger margins than the latex defaults
+    
+    \geometry{verbose,tmargin=1in,bmargin=1in,lmargin=1in,rmargin=1in}
+    
+    
+
+    \begin{document}
+    
+    
+    \maketitle
+    
+    
+
+    
+    \section{Image classification with
+CNNs}\label{image-classification-with-cnns}
+
+The goal of this exercise is to implement a specific CNN architecture
+with PyTorch and train it on the CIFAR-10 image classification dataset.
+We will start by introducing the dataset and then implement a
+\texttt{nn.Module} and a useful \texttt{Solver} class. Seperating the
+model from the actual training has proven itself as a sensible design
+decision. By the end of this exercise you should have succesfully
+trained your (possible) first CNN model and have a boilerplate
+\texttt{Solver} class which you can reuse for the next exercise and your
+future research projects.
+
+For an inspiration on how to implement a model or the solver class you
+can have a look at \href{https://github.com/pytorch/examples}{these}
+PyTorch examples.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}1}]:} \PY{k+kn}{import} \PY{n+nn}{numpy} \PY{k}{as} \PY{n+nn}{np}
+        \PY{k+kn}{import} \PY{n+nn}{matplotlib}\PY{n+nn}{.}\PY{n+nn}{pyplot} \PY{k}{as} \PY{n+nn}{plt}
+        \PY{k+kn}{import} \PY{n+nn}{torch}
+        \PY{k+kn}{from} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{autograd} \PY{k}{import} \PY{n}{Variable}
+        
+        \PY{k+kn}{from} \PY{n+nn}{exercise\PYZus{}code}\PY{n+nn}{.}\PY{n+nn}{classifiers}\PY{n+nn}{.}\PY{n+nn}{classification\PYZus{}cnn} \PY{k}{import} \PY{n}{ClassificationCNN}
+        \PY{k+kn}{from} \PY{n+nn}{exercise\PYZus{}code}\PY{n+nn}{.}\PY{n+nn}{data\PYZus{}utils} \PY{k}{import} \PY{n}{get\PYZus{}CIFAR10\PYZus{}datasets}\PY{p}{,} \PY{n}{OverfitSampler}\PY{p}{,} \PY{n}{rel\PYZus{}error}
+        
+        \PY{c+c1}{\PYZsh{}torch.set\PYZus{}default\PYZus{}tensor\PYZus{}type(\PYZsq{}torch.FloatTensor\PYZsq{})}
+        \PY{c+c1}{\PYZsh{}set up default cuda device}
+        \PY{n}{device} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{device}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cuda:0}\PY{l+s+s2}{\PYZdq{}} \PY{k}{if} \PY{n}{torch}\PY{o}{.}\PY{n}{cuda}\PY{o}{.}\PY{n}{is\PYZus{}available}\PY{p}{(}\PY{p}{)} \PY{k}{else} \PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{cpu}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+        
+        \PY{o}{\PYZpc{}}\PY{k}{matplotlib} inline
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{figure.figsize}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{p}{(}\PY{l+m+mf}{10.0}\PY{p}{,} \PY{l+m+mf}{8.0}\PY{p}{)} \PY{c+c1}{\PYZsh{} set default size of plots}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{image.interpolation}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{nearest}\PY{l+s+s1}{\PYZsq{}}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{rcParams}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{image.cmap}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]} \PY{o}{=} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{gray}\PY{l+s+s1}{\PYZsq{}}
+        
+        \PY{c+c1}{\PYZsh{} for auto\PYZhy{}reloading external modules}
+        \PY{c+c1}{\PYZsh{} see http://stackoverflow.com/questions/1907993/autoreload\PYZhy{}of\PYZhy{}modules\PYZhy{}in\PYZhy{}ipython}
+        \PY{o}{\PYZpc{}}\PY{k}{load\PYZus{}ext} autoreload
+        \PY{o}{\PYZpc{}}\PY{k}{autoreload} 2
+\end{Verbatim}
+
+
+    \section{CIFAR-10 Dataset}\label{cifar-10-dataset}
+
+Since the focus of this exercise should be neural network models and how
+to successfully train them, we provide you with preprocessed and
+prepared datasets. For an even easier management of the train,
+validation and test data pipelines we provide you with custom
+\texttt{torch.utils.data.Dataset} classes. Use the official
+\href{http://pytorch.org/docs/data.html}{documentation} to make yourself
+familiar with the \texttt{Dataset} and \texttt{DataLoader} classes.
+Think about how you have to integrate them in your training loop and
+have a look at the data preprocessing steps in
+\texttt{dl4cv/data\_utils.py}.
+
+The \texttt{num\_workers} argument of the \texttt{DataLoader} class
+allows you to preprocess data with multiple threads.
+
+\begin{verbatim}
+<h3>Note</h3>
+<p>In this case we generated the `Dataset` classes after we applied all the preprocessing steps. Other datasets or random data augmentation might require an online preprocessing which can be integrated into the `Dataset` classes. See `torchvision.Transform` for examples.</p>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}2}]:} \PY{c+c1}{\PYZsh{} Load the (preprocessed) CIFAR10 data. The preprocessing includes}
+        \PY{c+c1}{\PYZsh{} channel swapping, normalization and train\PYZhy{}val\PYZhy{}test splitting.}
+        \PY{c+c1}{\PYZsh{} Loading the datasets might take a while.}
+        
+        \PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{val\PYZus{}data}\PY{p}{,} \PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{mean\PYZus{}image} \PY{o}{=} \PY{n}{get\PYZus{}CIFAR10\PYZus{}datasets}\PY{p}{(}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Train size: }\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Val size: }\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{val\PYZus{}data}\PY{p}{)}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{Test size: }\PY{l+s+si}{\PYZpc{}i}\PY{l+s+s2}{\PYZdq{}} \PY{o}{\PYZpc{}} \PY{n+nb}{len}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Train size: 48000
+Val size: 1000
+Test size: 1000
+
+    \end{Verbatim}
+
+    \subsection{Visualize Examples}\label{visualize-examples}
+
+To make yourself familiar with the dataset we visualize some examples.
+We show a few examples from each class. Note that we have to revert
+(transposition and mean subtraction) some preprocessing steps.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}3}]:} \PY{n}{classes} \PY{o}{=} \PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{plane}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{car}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{bird}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{cat}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{deer}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{dog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{frog}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{horse}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{ship}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{truck}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}
+        \PY{n}{num\PYZus{}classes} \PY{o}{=} \PY{n+nb}{len}\PY{p}{(}\PY{n}{classes}\PY{p}{)}
+        \PY{n}{samples\PYZus{}per\PYZus{}class} \PY{o}{=} \PY{l+m+mi}{7}
+        \PY{k}{for} \PY{n}{cls\PYZus{}idx}\PY{p}{,} \PY{n+nb+bp}{cls} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{classes}\PY{p}{)}\PY{p}{:}
+            \PY{n}{cls\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{n}{datum} \PY{k}{for} \PY{n}{datum} \PY{o+ow}{in} \PY{n}{test\PYZus{}data} \PY{k}{if} \PY{n}{datum}\PY{p}{[}\PY{l+m+mi}{1}\PY{p}{]} \PY{o}{==} \PY{n}{cls\PYZus{}idx}\PY{p}{]}
+            \PY{n}{rnd\PYZus{}idxs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randint}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{n+nb}{len}\PY{p}{(}\PY{n}{cls\PYZus{}data}\PY{p}{)}\PY{p}{,} \PY{n}{samples\PYZus{}per\PYZus{}class}\PY{p}{)}
+            \PY{n}{rnd\PYZus{}cls\PYZus{}data} \PY{o}{=} \PY{p}{[}\PY{n}{datum} \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{datum} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{cls\PYZus{}data}\PY{p}{)} \PY{k}{if} \PY{n}{i} \PY{o+ow}{in} \PY{n}{rnd\PYZus{}idxs}\PY{p}{]}
+            \PY{k}{for} \PY{n}{i}\PY{p}{,} \PY{n}{cls\PYZus{}datum} \PY{o+ow}{in} \PY{n+nb}{enumerate}\PY{p}{(}\PY{n}{rnd\PYZus{}cls\PYZus{}data}\PY{p}{)}\PY{p}{:}
+                \PY{n}{plt\PYZus{}idx} \PY{o}{=} \PY{n}{i} \PY{o}{*} \PY{n}{num\PYZus{}classes} \PY{o}{+} \PY{n}{cls\PYZus{}idx} \PY{o}{+} \PY{l+m+mi}{1}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{n}{samples\PYZus{}per\PYZus{}class}\PY{p}{,} \PY{n}{num\PYZus{}classes}\PY{p}{,} \PY{n}{plt\PYZus{}idx}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{cls\PYZus{}datum}\PY{p}{[}\PY{l+m+mi}{0}\PY{p}{]}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)} \PY{o}{+} \PY{n}{mean\PYZus{}image}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{l+m+mi}{1}\PY{p}{,}\PY{l+m+mi}{2}\PY{p}{,}\PY{l+m+mi}{0}\PY{p}{)}\PY{p}{)}
+                \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+                \PY{k}{if} \PY{n}{i} \PY{o}{==} \PY{l+m+mi}{0}\PY{p}{:}
+                    \PY{n}{plt}\PY{o}{.}\PY{n}{title}\PY{p}{(}\PY{n+nb+bp}{cls}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_5_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Model Architecture and Forward
+Pass}\label{model-architecture-and-forward-pass}
+
+After you understood the core concepts of PyTorch and have a rough idea
+on how to implement your own model, complete the initialization and
+forward methods of the \texttt{ClassificationCNN} in the
+\texttt{dl4cv/classifiers/classification\_cnn.py} file. Note that we do
+not have to implement a backward pass since this is automatically
+handled by the \texttt{autograd} package.
+
+Use the cell below to check your results:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}4}]:} \PY{k+kn}{from} \PY{n+nn}{exercise\PYZus{}code}\PY{n+nn}{.}\PY{n+nn}{classifiers}\PY{n+nn}{.}\PY{n+nn}{classification\PYZus{}cnn} \PY{k}{import} \PY{n}{ClassificationCNN}
+        
+        \PY{n}{torch}\PY{o}{.}\PY{n}{manual\PYZus{}seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{seed}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{)}
+        
+        \PY{n}{X} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{random}\PY{o}{.}\PY{n}{randn}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{n}{np}\PY{o}{.}\PY{n}{float32}\PY{p}{)}
+        \PY{n}{X\PYZus{}tensor} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{from\PYZus{}numpy}\PY{p}{(}\PY{n}{X}\PY{o}{.}\PY{n}{copy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+        \PY{n}{inputs} \PY{o}{=} \PY{n}{X\PYZus{}tensor}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+        
+        \PY{n}{model} \PY{o}{=} \PY{n}{ClassificationCNN}\PY{p}{(}\PY{n}{input\PYZus{}dim}\PY{o}{=}\PY{p}{(}\PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{,} \PY{l+m+mi}{5}\PY{p}{)}\PY{p}{,} \PY{n}{num\PYZus{}classes}\PY{o}{=}\PY{l+m+mi}{3}\PY{p}{)}
+        \PY{n}{model}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+        \PY{n}{outputs} \PY{o}{=} \PY{n}{model}\PY{o}{.}\PY{n}{forward}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}
+        \PY{n}{correct\PYZus{}outputs} \PY{o}{=} \PY{n}{np}\PY{o}{.}\PY{n}{array}\PY{p}{(}\PY{p}{[}\PY{p}{[}\PY{l+m+mf}{0.0012621}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.099135}\PY{p}{,}  \PY{l+m+mf}{0.076110}\PY{p}{]}\PY{p}{,}
+                                    \PY{p}{[}\PY{l+m+mf}{0.0013608}\PY{p}{,} \PY{o}{\PYZhy{}}\PY{l+m+mf}{0.099130}\PY{p}{,}  \PY{l+m+mf}{0.076120}\PY{p}{]}\PY{p}{]}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{} The difference should be very small. We get 1e\PYZhy{}5}
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Difference between the correct and your forward pass:}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n+nb}{print}\PY{p}{(}\PY{n}{rel\PYZus{}error}\PY{p}{(}\PY{n}{correct\PYZus{}outputs}\PY{p}{,} \PY{n}{outputs}\PY{o}{.}\PY{n}{cpu}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{detach}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Difference between the correct and your forward pass:
+2.0824978654369382e-05
+
+    \end{Verbatim}
+
+    \subsection{Training and Validation with the
+Solver}\label{training-and-validation-with-the-solver}
+
+We train and validate our previously generated model with a seperate
+\texttt{Solver} class defined in \texttt{dl4cv/solver.py}. Complete the
+\texttt{.train()} method and try to come up with an efficient iteration
+scheme as well as an informative training logger.
+
+Use the cells below to test your solver. A nice trick is to train your
+model with just a few training samples. You should be able to overfit
+small datasets, which will result in very high training accuracy and
+comparatively low validation accuracy.
+
+\begin{verbatim}
+<h3>Note</h3>
+<p>As seen below, the design of our `Solver` class is indepdenent of the particular model or data pipeline. This facilitates the reuse of the class and its modular structure allows the training of different models.</p>
+\end{verbatim}
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}5}]:} \PY{k+kn}{from} \PY{n+nn}{exercise\PYZus{}code}\PY{n+nn}{.}\PY{n+nn}{classifiers}\PY{n+nn}{.}\PY{n+nn}{classification\PYZus{}cnn} \PY{k}{import} \PY{n}{ClassificationCNN}
+        \PY{k+kn}{from} \PY{n+nn}{exercise\PYZus{}code}\PY{n+nn}{.}\PY{n+nn}{solver} \PY{k}{import} \PY{n}{Solver}
+        \PY{k+kn}{from} \PY{n+nn}{torch}\PY{n+nn}{.}\PY{n+nn}{utils}\PY{n+nn}{.}\PY{n+nn}{data}\PY{n+nn}{.}\PY{n+nn}{sampler} \PY{k}{import} \PY{n}{SequentialSampler}
+        
+        \PY{n}{num\PYZus{}train} \PY{o}{=} \PY{l+m+mi}{200}
+        \PY{n}{OverfitSampler} \PY{o}{=} \PY{n}{SequentialSampler}\PY{p}{(}\PY{n+nb}{range}\PY{p}{(}\PY{n}{num\PYZus{}train}\PY{p}{)}\PY{p}{)}
+        
+        \PY{n}{train\PYZus{}loader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{,}
+                                                   \PY{n}{sampler}\PY{o}{=}\PY{n}{OverfitSampler}\PY{p}{)}
+        \PY{n}{val\PYZus{}loader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{val\PYZus{}data}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        
+        \PY{n}{overfit\PYZus{}model} \PY{o}{=} \PY{n}{ClassificationCNN}\PY{p}{(}\PY{p}{)}
+        \PY{n}{overfit\PYZus{}model}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+        \PY{n}{overfit\PYZus{}solver} \PY{o}{=} \PY{n}{Solver}\PY{p}{(}\PY{n}{optim\PYZus{}args}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lr}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{overfit\PYZus{}solver}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{overfit\PYZus{}model}\PY{p}{,} \PY{n}{train\PYZus{}loader}\PY{p}{,} \PY{n}{val\PYZus{}loader}\PY{p}{,} \PY{n}{log\PYZus{}nth}\PY{o}{=}\PY{l+m+mi}{1}\PY{p}{,} \PY{n}{num\PYZus{}epochs}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+START TRAIN.
+[Iteration 1/80] TRAIN loss: 2.299
+[Iteration 2/80] TRAIN loss: 2.324
+[Iteration 3/80] TRAIN loss: 2.333
+[Iteration 4/80] TRAIN loss: 2.211
+[Epoch 1/20] TRAIN acc/loss: 0.260/2.211
+[Epoch 1/20] VAL   acc/loss: 0.100/2.296
+[Iteration 5/80] TRAIN loss: 2.204
+[Iteration 6/80] TRAIN loss: 2.230
+[Iteration 7/80] TRAIN loss: 2.234
+[Iteration 8/80] TRAIN loss: 2.127
+[Epoch 2/20] TRAIN acc/loss: 0.260/2.127
+[Epoch 2/20] VAL   acc/loss: 0.100/2.319
+[Iteration 9/80] TRAIN loss: 2.129
+[Iteration 10/80] TRAIN loss: 2.136
+[Iteration 11/80] TRAIN loss: 2.136
+[Iteration 12/80] TRAIN loss: 2.020
+[Epoch 3/20] TRAIN acc/loss: 0.260/2.020
+[Epoch 3/20] VAL   acc/loss: 0.098/2.246
+[Iteration 13/80] TRAIN loss: 2.064
+[Iteration 14/80] TRAIN loss: 2.066
+[Iteration 15/80] TRAIN loss: 2.057
+[Iteration 16/80] TRAIN loss: 1.934
+[Epoch 4/20] TRAIN acc/loss: 0.260/1.934
+[Epoch 4/20] VAL   acc/loss: 0.117/2.238
+[Iteration 17/80] TRAIN loss: 1.992
+[Iteration 18/80] TRAIN loss: 1.979
+[Iteration 19/80] TRAIN loss: 1.958
+[Iteration 20/80] TRAIN loss: 1.860
+[Epoch 5/20] TRAIN acc/loss: 0.280/1.860
+[Epoch 5/20] VAL   acc/loss: 0.134/2.260
+[Iteration 21/80] TRAIN loss: 1.907
+[Iteration 22/80] TRAIN loss: 1.873
+[Iteration 23/80] TRAIN loss: 1.899
+[Iteration 24/80] TRAIN loss: 1.755
+[Epoch 6/20] TRAIN acc/loss: 0.320/1.755
+[Epoch 6/20] VAL   acc/loss: 0.171/2.281
+[Iteration 25/80] TRAIN loss: 1.808
+[Iteration 26/80] TRAIN loss: 1.773
+[Iteration 27/80] TRAIN loss: 1.833
+[Iteration 28/80] TRAIN loss: 1.658
+[Epoch 7/20] TRAIN acc/loss: 0.380/1.658
+[Epoch 7/20] VAL   acc/loss: 0.190/2.346
+[Iteration 29/80] TRAIN loss: 1.707
+[Iteration 30/80] TRAIN loss: 1.684
+[Iteration 31/80] TRAIN loss: 1.732
+[Iteration 32/80] TRAIN loss: 1.572
+[Epoch 8/20] TRAIN acc/loss: 0.420/1.572
+[Epoch 8/20] VAL   acc/loss: 0.213/2.404
+[Iteration 33/80] TRAIN loss: 1.622
+[Iteration 34/80] TRAIN loss: 1.584
+[Iteration 35/80] TRAIN loss: 1.624
+[Iteration 36/80] TRAIN loss: 1.469
+[Epoch 9/20] TRAIN acc/loss: 0.420/1.469
+[Epoch 9/20] VAL   acc/loss: 0.217/2.469
+[Iteration 37/80] TRAIN loss: 1.555
+[Iteration 38/80] TRAIN loss: 1.483
+[Iteration 39/80] TRAIN loss: 1.513
+[Iteration 40/80] TRAIN loss: 1.366
+[Epoch 10/20] TRAIN acc/loss: 0.460/1.366
+[Epoch 10/20] VAL   acc/loss: 0.216/2.527
+[Iteration 41/80] TRAIN loss: 1.467
+[Iteration 42/80] TRAIN loss: 1.377
+[Iteration 43/80] TRAIN loss: 1.407
+[Iteration 44/80] TRAIN loss: 1.262
+[Epoch 11/20] TRAIN acc/loss: 0.500/1.262
+[Epoch 11/20] VAL   acc/loss: 0.220/2.573
+[Iteration 45/80] TRAIN loss: 1.381
+[Iteration 46/80] TRAIN loss: 1.258
+[Iteration 47/80] TRAIN loss: 1.308
+[Iteration 48/80] TRAIN loss: 1.169
+[Epoch 12/20] TRAIN acc/loss: 0.600/1.169
+[Epoch 12/20] VAL   acc/loss: 0.231/2.640
+[Iteration 49/80] TRAIN loss: 1.299
+[Iteration 50/80] TRAIN loss: 1.140
+[Iteration 51/80] TRAIN loss: 1.232
+[Iteration 52/80] TRAIN loss: 1.060
+[Epoch 13/20] TRAIN acc/loss: 0.660/1.060
+[Epoch 13/20] VAL   acc/loss: 0.223/2.709
+[Iteration 53/80] TRAIN loss: 1.190
+[Iteration 54/80] TRAIN loss: 1.037
+[Iteration 55/80] TRAIN loss: 1.150
+[Iteration 56/80] TRAIN loss: 0.973
+[Epoch 14/20] TRAIN acc/loss: 0.740/0.973
+[Epoch 14/20] VAL   acc/loss: 0.225/2.796
+[Iteration 57/80] TRAIN loss: 1.062
+[Iteration 58/80] TRAIN loss: 0.948
+[Iteration 59/80] TRAIN loss: 1.072
+[Iteration 60/80] TRAIN loss: 0.885
+[Epoch 15/20] TRAIN acc/loss: 0.760/0.885
+[Epoch 15/20] VAL   acc/loss: 0.233/2.897
+[Iteration 61/80] TRAIN loss: 0.956
+[Iteration 62/80] TRAIN loss: 0.848
+[Iteration 63/80] TRAIN loss: 0.993
+[Iteration 64/80] TRAIN loss: 0.784
+[Epoch 16/20] TRAIN acc/loss: 0.820/0.784
+[Epoch 16/20] VAL   acc/loss: 0.235/3.004
+[Iteration 65/80] TRAIN loss: 0.848
+[Iteration 66/80] TRAIN loss: 0.764
+[Iteration 67/80] TRAIN loss: 0.918
+[Iteration 68/80] TRAIN loss: 0.692
+[Epoch 17/20] TRAIN acc/loss: 0.820/0.692
+[Epoch 17/20] VAL   acc/loss: 0.239/3.144
+[Iteration 69/80] TRAIN loss: 0.762
+[Iteration 70/80] TRAIN loss: 0.656
+[Iteration 71/80] TRAIN loss: 0.846
+[Iteration 72/80] TRAIN loss: 0.619
+[Epoch 18/20] TRAIN acc/loss: 0.840/0.619
+[Epoch 18/20] VAL   acc/loss: 0.235/3.266
+[Iteration 73/80] TRAIN loss: 0.660
+[Iteration 74/80] TRAIN loss: 0.587
+[Iteration 75/80] TRAIN loss: 0.757
+[Iteration 76/80] TRAIN loss: 0.540
+[Epoch 19/20] TRAIN acc/loss: 0.860/0.540
+[Epoch 19/20] VAL   acc/loss: 0.238/3.414
+[Iteration 77/80] TRAIN loss: 0.583
+[Iteration 78/80] TRAIN loss: 0.495
+[Iteration 79/80] TRAIN loss: 0.701
+[Iteration 80/80] TRAIN loss: 0.483
+[Epoch 20/20] TRAIN acc/loss: 0.900/0.483
+[Epoch 20/20] VAL   acc/loss: 0.250/3.557
+FINISH.
+
+    \end{Verbatim}
+
+    Plotting the loss, training accuracy, and validation accuracy should
+show clear overfitting:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}6}]:} \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{overfit\PYZus{}solver}\PY{o}{.}\PY{n}{train\PYZus{}loss\PYZus{}history}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{overfit\PYZus{}solver}\PY{o}{.}\PY{n}{val\PYZus{}loss\PYZus{}history}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{iteration}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{loss}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        
+        \PY{n}{plt}\PY{o}{.}\PY{n}{subplot}\PY{p}{(}\PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{overfit\PYZus{}solver}\PY{o}{.}\PY{n}{train\PYZus{}acc\PYZus{}history}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{plot}\PY{p}{(}\PY{n}{overfit\PYZus{}solver}\PY{o}{.}\PY{n}{val\PYZus{}acc\PYZus{}history}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{\PYZhy{}o}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{legend}\PY{p}{(}\PY{p}{[}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{train}\PY{l+s+s1}{\PYZsq{}}\PY{p}{,} \PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{val}\PY{l+s+s1}{\PYZsq{}}\PY{p}{]}\PY{p}{,} \PY{n}{loc}\PY{o}{=}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{upper left}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{xlabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{epoch}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{ylabel}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{accuracy}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_11_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \subsection{Train the Network}\label{train-the-network}
+
+Now train your model with the full dataset. By training a
+\texttt{ThreeLayerCNN} model for one epoch, you should already achieve
+greater than 40\% accuracy on the validation set. If your training is
+painfully slow check if you did not forget to call the
+\texttt{nn.Module.to()} method to transfer your model onto GPU.
+
+For the overfitting example we provided you with a set of hyperparamters
+(\texttt{hidden\_dim}, \texttt{lr}, \texttt{weight\_decay}, ...). You
+can start with the same parameter values but in order to maximize your
+accuracy you should try to train multiple models with different sets of
+hyperparamters. This process is called hyperparameter optimization.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}7}]:} \PY{k+kn}{from} \PY{n+nn}{exercise\PYZus{}code}\PY{n+nn}{.}\PY{n+nn}{classifiers}\PY{n+nn}{.}\PY{n+nn}{classification\PYZus{}cnn} \PY{k}{import} \PY{n}{ClassificationCNN}
+        \PY{k+kn}{from} \PY{n+nn}{exercise\PYZus{}code}\PY{n+nn}{.}\PY{n+nn}{solver} \PY{k}{import} \PY{n}{Solver}
+        
+        \PY{n}{train\PYZus{}loader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{train\PYZus{}data}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{True}\PY{p}{,} \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        \PY{n}{val\PYZus{}loader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{val\PYZus{}data}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        \PY{c+c1}{\PYZsh{} TODO: Initialize a model and train it using your Solver class. Start     \PYZsh{}}
+        \PY{c+c1}{\PYZsh{} with the previously given set of hyperparameters.                        \PYZsh{}}
+        \PY{c+c1}{\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}\PYZsh{}}
+        
+        \PY{n}{model} \PY{o}{=} \PY{n}{ClassificationCNN}\PY{p}{(}\PY{p}{)}
+        \PY{n}{solver} \PY{o}{=} \PY{n}{Solver}\PY{p}{(}\PY{n}{optim\PYZus{}args}\PY{o}{=}\PY{p}{\PYZob{}}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{lr}\PY{l+s+s2}{\PYZdq{}}\PY{p}{:} \PY{l+m+mf}{1e\PYZhy{}3}\PY{p}{\PYZcb{}}\PY{p}{)}
+        \PY{n}{solver}\PY{o}{.}\PY{n}{train}\PY{p}{(}\PY{n}{model}\PY{p}{,} \PY{n}{train\PYZus{}loader}\PY{p}{,} \PY{n}{val\PYZus{}loader}\PY{p}{,} \PY{n}{log\PYZus{}nth}\PY{o}{=}\PY{l+m+mi}{20}\PY{p}{,} \PY{n}{num\PYZus{}epochs}\PY{o}{=}\PY{l+m+mi}{10}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+START TRAIN.
+[Iteration 20/9600] TRAIN loss: 2.241
+[Iteration 40/9600] TRAIN loss: 2.104
+[Iteration 60/9600] TRAIN loss: 2.020
+[Iteration 80/9600] TRAIN loss: 1.943
+[Iteration 100/9600] TRAIN loss: 1.879
+[Iteration 120/9600] TRAIN loss: 1.815
+[Iteration 140/9600] TRAIN loss: 1.790
+[Iteration 160/9600] TRAIN loss: 1.739
+[Iteration 180/9600] TRAIN loss: 1.719
+[Iteration 200/9600] TRAIN loss: 1.713
+[Iteration 220/9600] TRAIN loss: 1.671
+[Iteration 240/9600] TRAIN loss: 1.645
+[Iteration 260/9600] TRAIN loss: 1.650
+[Iteration 280/9600] TRAIN loss: 1.634
+[Iteration 300/9600] TRAIN loss: 1.564
+[Iteration 320/9600] TRAIN loss: 1.608
+[Iteration 340/9600] TRAIN loss: 1.545
+[Iteration 360/9600] TRAIN loss: 1.567
+[Iteration 380/9600] TRAIN loss: 1.549
+[Iteration 400/9600] TRAIN loss: 1.438
+[Iteration 420/9600] TRAIN loss: 1.500
+[Iteration 440/9600] TRAIN loss: 1.496
+[Iteration 460/9600] TRAIN loss: 1.456
+[Iteration 480/9600] TRAIN loss: 1.506
+[Iteration 500/9600] TRAIN loss: 1.492
+[Iteration 520/9600] TRAIN loss: 1.503
+[Iteration 540/9600] TRAIN loss: 1.432
+[Iteration 560/9600] TRAIN loss: 1.461
+[Iteration 580/9600] TRAIN loss: 1.377
+[Iteration 600/9600] TRAIN loss: 1.468
+[Iteration 620/9600] TRAIN loss: 1.312
+[Iteration 640/9600] TRAIN loss: 1.435
+[Iteration 660/9600] TRAIN loss: 1.366
+[Iteration 680/9600] TRAIN loss: 1.449
+[Iteration 700/9600] TRAIN loss: 1.428
+[Iteration 720/9600] TRAIN loss: 1.374
+[Iteration 740/9600] TRAIN loss: 1.399
+[Iteration 760/9600] TRAIN loss: 1.362
+[Iteration 780/9600] TRAIN loss: 1.379
+[Iteration 800/9600] TRAIN loss: 1.367
+[Iteration 820/9600] TRAIN loss: 1.405
+[Iteration 840/9600] TRAIN loss: 1.353
+[Iteration 860/9600] TRAIN loss: 1.391
+[Iteration 880/9600] TRAIN loss: 1.337
+[Iteration 900/9600] TRAIN loss: 1.298
+[Iteration 920/9600] TRAIN loss: 1.351
+[Iteration 940/9600] TRAIN loss: 1.341
+[Iteration 960/9600] TRAIN loss: 1.340
+[Epoch 1/10] TRAIN acc/loss: 0.540/1.340
+[Epoch 1/10] VAL   acc/loss: 0.524/1.317
+[Iteration 980/9600] TRAIN loss: 1.293
+[Iteration 1000/9600] TRAIN loss: 1.344
+[Iteration 1020/9600] TRAIN loss: 1.289
+[Iteration 1040/9600] TRAIN loss: 1.259
+[Iteration 1060/9600] TRAIN loss: 1.332
+[Iteration 1080/9600] TRAIN loss: 1.265
+[Iteration 1100/9600] TRAIN loss: 1.262
+[Iteration 1120/9600] TRAIN loss: 1.317
+[Iteration 1140/9600] TRAIN loss: 1.274
+[Iteration 1160/9600] TRAIN loss: 1.264
+[Iteration 1180/9600] TRAIN loss: 1.273
+[Iteration 1200/9600] TRAIN loss: 1.321
+[Iteration 1220/9600] TRAIN loss: 1.315
+[Iteration 1240/9600] TRAIN loss: 1.292
+[Iteration 1260/9600] TRAIN loss: 1.257
+[Iteration 1280/9600] TRAIN loss: 1.252
+[Iteration 1300/9600] TRAIN loss: 1.232
+[Iteration 1320/9600] TRAIN loss: 1.212
+[Iteration 1340/9600] TRAIN loss: 1.260
+[Iteration 1360/9600] TRAIN loss: 1.237
+[Iteration 1380/9600] TRAIN loss: 1.267
+[Iteration 1400/9600] TRAIN loss: 1.294
+[Iteration 1420/9600] TRAIN loss: 1.218
+[Iteration 1440/9600] TRAIN loss: 1.266
+[Iteration 1460/9600] TRAIN loss: 1.225
+[Iteration 1480/9600] TRAIN loss: 1.258
+[Iteration 1500/9600] TRAIN loss: 1.208
+[Iteration 1520/9600] TRAIN loss: 1.264
+[Iteration 1540/9600] TRAIN loss: 1.237
+[Iteration 1560/9600] TRAIN loss: 1.286
+[Iteration 1580/9600] TRAIN loss: 1.182
+[Iteration 1600/9600] TRAIN loss: 1.261
+[Iteration 1620/9600] TRAIN loss: 1.182
+[Iteration 1640/9600] TRAIN loss: 1.242
+[Iteration 1660/9600] TRAIN loss: 1.182
+[Iteration 1680/9600] TRAIN loss: 1.207
+[Iteration 1700/9600] TRAIN loss: 1.238
+[Iteration 1720/9600] TRAIN loss: 1.224
+[Iteration 1740/9600] TRAIN loss: 1.255
+[Iteration 1760/9600] TRAIN loss: 1.240
+[Iteration 1780/9600] TRAIN loss: 1.246
+[Iteration 1800/9600] TRAIN loss: 1.199
+[Iteration 1820/9600] TRAIN loss: 1.169
+[Iteration 1840/9600] TRAIN loss: 1.220
+[Iteration 1860/9600] TRAIN loss: 1.241
+[Iteration 1880/9600] TRAIN loss: 1.240
+[Iteration 1900/9600] TRAIN loss: 1.181
+[Iteration 1920/9600] TRAIN loss: 1.114
+[Epoch 2/10] TRAIN acc/loss: 0.580/1.114
+[Epoch 2/10] VAL   acc/loss: 0.583/1.213
+[Iteration 1940/9600] TRAIN loss: 1.127
+[Iteration 1960/9600] TRAIN loss: 1.107
+[Iteration 1980/9600] TRAIN loss: 1.150
+[Iteration 2000/9600] TRAIN loss: 1.176
+[Iteration 2020/9600] TRAIN loss: 1.169
+[Iteration 2040/9600] TRAIN loss: 1.153
+[Iteration 2060/9600] TRAIN loss: 1.083
+[Iteration 2080/9600] TRAIN loss: 1.176
+[Iteration 2100/9600] TRAIN loss: 1.109
+[Iteration 2120/9600] TRAIN loss: 1.178
+[Iteration 2140/9600] TRAIN loss: 1.150
+[Iteration 2160/9600] TRAIN loss: 1.139
+[Iteration 2180/9600] TRAIN loss: 1.137
+[Iteration 2200/9600] TRAIN loss: 1.120
+[Iteration 2220/9600] TRAIN loss: 1.120
+[Iteration 2240/9600] TRAIN loss: 1.182
+[Iteration 2260/9600] TRAIN loss: 1.137
+[Iteration 2280/9600] TRAIN loss: 1.120
+[Iteration 2300/9600] TRAIN loss: 1.122
+[Iteration 2320/9600] TRAIN loss: 1.143
+[Iteration 2340/9600] TRAIN loss: 1.086
+[Iteration 2360/9600] TRAIN loss: 1.102
+[Iteration 2380/9600] TRAIN loss: 1.144
+[Iteration 2400/9600] TRAIN loss: 1.155
+[Iteration 2420/9600] TRAIN loss: 1.101
+[Iteration 2440/9600] TRAIN loss: 1.137
+[Iteration 2460/9600] TRAIN loss: 1.052
+[Iteration 2480/9600] TRAIN loss: 1.138
+[Iteration 2500/9600] TRAIN loss: 1.119
+[Iteration 2520/9600] TRAIN loss: 1.085
+[Iteration 2540/9600] TRAIN loss: 1.116
+[Iteration 2560/9600] TRAIN loss: 1.131
+[Iteration 2580/9600] TRAIN loss: 1.101
+[Iteration 2600/9600] TRAIN loss: 1.119
+[Iteration 2620/9600] TRAIN loss: 1.078
+[Iteration 2640/9600] TRAIN loss: 1.080
+[Iteration 2660/9600] TRAIN loss: 1.140
+[Iteration 2680/9600] TRAIN loss: 1.100
+[Iteration 2700/9600] TRAIN loss: 1.079
+[Iteration 2720/9600] TRAIN loss: 1.109
+[Iteration 2740/9600] TRAIN loss: 1.102
+[Iteration 2760/9600] TRAIN loss: 1.096
+[Iteration 2780/9600] TRAIN loss: 1.089
+[Iteration 2800/9600] TRAIN loss: 1.104
+[Iteration 2820/9600] TRAIN loss: 1.124
+[Iteration 2840/9600] TRAIN loss: 1.081
+[Iteration 2860/9600] TRAIN loss: 1.081
+[Iteration 2880/9600] TRAIN loss: 1.096
+[Epoch 3/10] TRAIN acc/loss: 0.600/1.096
+[Epoch 3/10] VAL   acc/loss: 0.613/1.128
+[Iteration 2900/9600] TRAIN loss: 1.011
+[Iteration 2920/9600] TRAIN loss: 0.987
+[Iteration 2940/9600] TRAIN loss: 0.986
+[Iteration 2960/9600] TRAIN loss: 1.054
+[Iteration 2980/9600] TRAIN loss: 0.989
+[Iteration 3000/9600] TRAIN loss: 1.036
+[Iteration 3020/9600] TRAIN loss: 1.051
+[Iteration 3040/9600] TRAIN loss: 1.064
+[Iteration 3060/9600] TRAIN loss: 1.036
+[Iteration 3080/9600] TRAIN loss: 1.072
+[Iteration 3100/9600] TRAIN loss: 0.993
+[Iteration 3120/9600] TRAIN loss: 1.009
+[Iteration 3140/9600] TRAIN loss: 1.056
+[Iteration 3160/9600] TRAIN loss: 0.962
+[Iteration 3180/9600] TRAIN loss: 0.998
+[Iteration 3200/9600] TRAIN loss: 1.014
+[Iteration 3220/9600] TRAIN loss: 1.082
+[Iteration 3240/9600] TRAIN loss: 1.007
+[Iteration 3260/9600] TRAIN loss: 1.004
+[Iteration 3280/9600] TRAIN loss: 1.028
+[Iteration 3300/9600] TRAIN loss: 1.065
+[Iteration 3320/9600] TRAIN loss: 1.015
+[Iteration 3340/9600] TRAIN loss: 1.056
+[Iteration 3360/9600] TRAIN loss: 1.016
+[Iteration 3380/9600] TRAIN loss: 1.075
+[Iteration 3400/9600] TRAIN loss: 1.029
+[Iteration 3420/9600] TRAIN loss: 1.040
+[Iteration 3440/9600] TRAIN loss: 0.992
+[Iteration 3460/9600] TRAIN loss: 0.978
+[Iteration 3480/9600] TRAIN loss: 1.043
+[Iteration 3500/9600] TRAIN loss: 0.991
+[Iteration 3520/9600] TRAIN loss: 1.089
+[Iteration 3540/9600] TRAIN loss: 1.030
+[Iteration 3560/9600] TRAIN loss: 0.980
+[Iteration 3580/9600] TRAIN loss: 1.005
+[Iteration 3600/9600] TRAIN loss: 1.024
+[Iteration 3620/9600] TRAIN loss: 1.048
+[Iteration 3640/9600] TRAIN loss: 1.028
+[Iteration 3660/9600] TRAIN loss: 0.974
+[Iteration 3680/9600] TRAIN loss: 1.037
+[Iteration 3700/9600] TRAIN loss: 0.994
+[Iteration 3720/9600] TRAIN loss: 1.002
+[Iteration 3740/9600] TRAIN loss: 0.976
+[Iteration 3760/9600] TRAIN loss: 1.024
+[Iteration 3780/9600] TRAIN loss: 1.011
+[Iteration 3800/9600] TRAIN loss: 1.039
+[Iteration 3820/9600] TRAIN loss: 0.947
+[Iteration 3840/9600] TRAIN loss: 0.994
+[Epoch 4/10] TRAIN acc/loss: 0.760/0.994
+[Epoch 4/10] VAL   acc/loss: 0.612/1.099
+[Iteration 3860/9600] TRAIN loss: 0.969
+[Iteration 3880/9600] TRAIN loss: 0.979
+[Iteration 3900/9600] TRAIN loss: 0.946
+[Iteration 3920/9600] TRAIN loss: 0.912
+[Iteration 3940/9600] TRAIN loss: 0.961
+[Iteration 3960/9600] TRAIN loss: 0.917
+[Iteration 3980/9600] TRAIN loss: 0.973
+[Iteration 4000/9600] TRAIN loss: 0.861
+[Iteration 4020/9600] TRAIN loss: 0.919
+[Iteration 4040/9600] TRAIN loss: 0.890
+[Iteration 4060/9600] TRAIN loss: 0.955
+[Iteration 4080/9600] TRAIN loss: 0.919
+[Iteration 4100/9600] TRAIN loss: 0.946
+[Iteration 4120/9600] TRAIN loss: 0.968
+[Iteration 4140/9600] TRAIN loss: 0.957
+[Iteration 4160/9600] TRAIN loss: 0.918
+[Iteration 4180/9600] TRAIN loss: 0.896
+[Iteration 4200/9600] TRAIN loss: 0.933
+[Iteration 4220/9600] TRAIN loss: 0.941
+[Iteration 4240/9600] TRAIN loss: 0.923
+[Iteration 4260/9600] TRAIN loss: 0.987
+[Iteration 4280/9600] TRAIN loss: 0.954
+[Iteration 4300/9600] TRAIN loss: 0.915
+[Iteration 4320/9600] TRAIN loss: 0.935
+[Iteration 4340/9600] TRAIN loss: 0.964
+[Iteration 4360/9600] TRAIN loss: 0.947
+[Iteration 4380/9600] TRAIN loss: 1.006
+[Iteration 4400/9600] TRAIN loss: 0.998
+[Iteration 4420/9600] TRAIN loss: 0.935
+[Iteration 4440/9600] TRAIN loss: 0.989
+[Iteration 4460/9600] TRAIN loss: 0.870
+[Iteration 4480/9600] TRAIN loss: 0.986
+[Iteration 4500/9600] TRAIN loss: 0.937
+[Iteration 4520/9600] TRAIN loss: 0.904
+[Iteration 4540/9600] TRAIN loss: 0.895
+[Iteration 4560/9600] TRAIN loss: 0.961
+[Iteration 4580/9600] TRAIN loss: 1.001
+[Iteration 4600/9600] TRAIN loss: 0.940
+[Iteration 4620/9600] TRAIN loss: 0.951
+[Iteration 4640/9600] TRAIN loss: 0.918
+[Iteration 4660/9600] TRAIN loss: 0.943
+[Iteration 4680/9600] TRAIN loss: 0.971
+[Iteration 4700/9600] TRAIN loss: 0.997
+[Iteration 4720/9600] TRAIN loss: 1.018
+[Iteration 4740/9600] TRAIN loss: 0.932
+[Iteration 4760/9600] TRAIN loss: 0.989
+[Iteration 4780/9600] TRAIN loss: 1.005
+[Iteration 4800/9600] TRAIN loss: 0.942
+[Epoch 5/10] TRAIN acc/loss: 0.720/0.942
+[Epoch 5/10] VAL   acc/loss: 0.625/1.060
+[Iteration 4820/9600] TRAIN loss: 0.839
+[Iteration 4840/9600] TRAIN loss: 0.857
+[Iteration 4860/9600] TRAIN loss: 0.841
+[Iteration 4880/9600] TRAIN loss: 0.887
+[Iteration 4900/9600] TRAIN loss: 0.865
+[Iteration 4920/9600] TRAIN loss: 0.880
+[Iteration 4940/9600] TRAIN loss: 0.880
+[Iteration 4960/9600] TRAIN loss: 0.898
+[Iteration 4980/9600] TRAIN loss: 0.814
+[Iteration 5000/9600] TRAIN loss: 0.896
+[Iteration 5020/9600] TRAIN loss: 0.873
+[Iteration 5040/9600] TRAIN loss: 0.867
+[Iteration 5060/9600] TRAIN loss: 0.805
+[Iteration 5080/9600] TRAIN loss: 0.851
+[Iteration 5100/9600] TRAIN loss: 0.863
+[Iteration 5120/9600] TRAIN loss: 0.849
+[Iteration 5140/9600] TRAIN loss: 0.901
+[Iteration 5160/9600] TRAIN loss: 0.882
+[Iteration 5180/9600] TRAIN loss: 0.914
+[Iteration 5200/9600] TRAIN loss: 0.936
+[Iteration 5220/9600] TRAIN loss: 0.907
+[Iteration 5240/9600] TRAIN loss: 0.923
+[Iteration 5260/9600] TRAIN loss: 0.905
+[Iteration 5280/9600] TRAIN loss: 0.873
+[Iteration 5300/9600] TRAIN loss: 0.895
+[Iteration 5320/9600] TRAIN loss: 0.878
+[Iteration 5340/9600] TRAIN loss: 0.906
+[Iteration 5360/9600] TRAIN loss: 0.926
+[Iteration 5380/9600] TRAIN loss: 0.905
+[Iteration 5400/9600] TRAIN loss: 0.999
+[Iteration 5420/9600] TRAIN loss: 0.889
+[Iteration 5440/9600] TRAIN loss: 0.915
+[Iteration 5460/9600] TRAIN loss: 0.909
+[Iteration 5480/9600] TRAIN loss: 0.888
+[Iteration 5500/9600] TRAIN loss: 0.880
+[Iteration 5520/9600] TRAIN loss: 0.856
+[Iteration 5540/9600] TRAIN loss: 0.900
+[Iteration 5560/9600] TRAIN loss: 0.945
+[Iteration 5580/9600] TRAIN loss: 0.946
+[Iteration 5600/9600] TRAIN loss: 0.844
+[Iteration 5620/9600] TRAIN loss: 0.915
+[Iteration 5640/9600] TRAIN loss: 0.846
+[Iteration 5660/9600] TRAIN loss: 0.842
+[Iteration 5680/9600] TRAIN loss: 0.881
+[Iteration 5700/9600] TRAIN loss: 0.926
+[Iteration 5720/9600] TRAIN loss: 0.896
+[Iteration 5740/9600] TRAIN loss: 0.868
+[Iteration 5760/9600] TRAIN loss: 0.881
+[Epoch 6/10] TRAIN acc/loss: 0.640/0.881
+[Epoch 6/10] VAL   acc/loss: 0.644/1.043
+[Iteration 5780/9600] TRAIN loss: 0.814
+[Iteration 5800/9600] TRAIN loss: 0.781
+[Iteration 5820/9600] TRAIN loss: 0.787
+[Iteration 5840/9600] TRAIN loss: 0.788
+[Iteration 5860/9600] TRAIN loss: 0.815
+[Iteration 5880/9600] TRAIN loss: 0.803
+[Iteration 5900/9600] TRAIN loss: 0.831
+[Iteration 5920/9600] TRAIN loss: 0.779
+[Iteration 5940/9600] TRAIN loss: 0.802
+[Iteration 5960/9600] TRAIN loss: 0.814
+[Iteration 5980/9600] TRAIN loss: 0.839
+[Iteration 6000/9600] TRAIN loss: 0.817
+[Iteration 6020/9600] TRAIN loss: 0.852
+[Iteration 6040/9600] TRAIN loss: 0.799
+[Iteration 6060/9600] TRAIN loss: 0.922
+[Iteration 6080/9600] TRAIN loss: 0.898
+[Iteration 6100/9600] TRAIN loss: 0.825
+[Iteration 6120/9600] TRAIN loss: 0.889
+[Iteration 6140/9600] TRAIN loss: 0.780
+[Iteration 6160/9600] TRAIN loss: 0.871
+[Iteration 6180/9600] TRAIN loss: 0.848
+[Iteration 6200/9600] TRAIN loss: 0.791
+[Iteration 6220/9600] TRAIN loss: 0.840
+[Iteration 6240/9600] TRAIN loss: 0.861
+[Iteration 6260/9600] TRAIN loss: 0.853
+[Iteration 6280/9600] TRAIN loss: 0.851
+[Iteration 6300/9600] TRAIN loss: 0.816
+[Iteration 6320/9600] TRAIN loss: 0.887
+[Iteration 6340/9600] TRAIN loss: 0.811
+[Iteration 6360/9600] TRAIN loss: 0.783
+[Iteration 6380/9600] TRAIN loss: 0.832
+[Iteration 6400/9600] TRAIN loss: 0.861
+[Iteration 6420/9600] TRAIN loss: 0.869
+[Iteration 6440/9600] TRAIN loss: 0.788
+[Iteration 6460/9600] TRAIN loss: 0.888
+[Iteration 6480/9600] TRAIN loss: 0.863
+[Iteration 6500/9600] TRAIN loss: 0.845
+[Iteration 6520/9600] TRAIN loss: 0.903
+[Iteration 6540/9600] TRAIN loss: 0.774
+[Iteration 6560/9600] TRAIN loss: 0.900
+[Iteration 6580/9600] TRAIN loss: 0.889
+[Iteration 6600/9600] TRAIN loss: 0.922
+[Iteration 6620/9600] TRAIN loss: 0.861
+[Iteration 6640/9600] TRAIN loss: 0.864
+[Iteration 6660/9600] TRAIN loss: 0.894
+[Iteration 6680/9600] TRAIN loss: 0.831
+[Iteration 6700/9600] TRAIN loss: 0.871
+[Iteration 6720/9600] TRAIN loss: 0.838
+[Epoch 7/10] TRAIN acc/loss: 0.840/0.838
+[Epoch 7/10] VAL   acc/loss: 0.657/1.031
+[Iteration 6740/9600] TRAIN loss: 0.784
+[Iteration 6760/9600] TRAIN loss: 0.731
+[Iteration 6780/9600] TRAIN loss: 0.740
+[Iteration 6800/9600] TRAIN loss: 0.753
+[Iteration 6820/9600] TRAIN loss: 0.769
+[Iteration 6840/9600] TRAIN loss: 0.737
+[Iteration 6860/9600] TRAIN loss: 0.756
+[Iteration 6880/9600] TRAIN loss: 0.815
+[Iteration 6900/9600] TRAIN loss: 0.807
+[Iteration 6920/9600] TRAIN loss: 0.791
+[Iteration 6940/9600] TRAIN loss: 0.797
+[Iteration 6960/9600] TRAIN loss: 0.787
+[Iteration 6980/9600] TRAIN loss: 0.831
+[Iteration 7000/9600] TRAIN loss: 0.753
+[Iteration 7020/9600] TRAIN loss: 0.788
+[Iteration 7040/9600] TRAIN loss: 0.790
+[Iteration 7060/9600] TRAIN loss: 0.786
+[Iteration 7080/9600] TRAIN loss: 0.759
+[Iteration 7100/9600] TRAIN loss: 0.762
+[Iteration 7120/9600] TRAIN loss: 0.772
+[Iteration 7140/9600] TRAIN loss: 0.771
+[Iteration 7160/9600] TRAIN loss: 0.806
+[Iteration 7180/9600] TRAIN loss: 0.802
+[Iteration 7200/9600] TRAIN loss: 0.774
+[Iteration 7220/9600] TRAIN loss: 0.804
+[Iteration 7240/9600] TRAIN loss: 0.798
+[Iteration 7260/9600] TRAIN loss: 0.769
+[Iteration 7280/9600] TRAIN loss: 0.752
+[Iteration 7300/9600] TRAIN loss: 0.727
+[Iteration 7320/9600] TRAIN loss: 0.831
+[Iteration 7340/9600] TRAIN loss: 0.831
+[Iteration 7360/9600] TRAIN loss: 0.792
+[Iteration 7380/9600] TRAIN loss: 0.795
+[Iteration 7400/9600] TRAIN loss: 0.809
+[Iteration 7420/9600] TRAIN loss: 0.827
+[Iteration 7440/9600] TRAIN loss: 0.840
+[Iteration 7460/9600] TRAIN loss: 0.781
+[Iteration 7480/9600] TRAIN loss: 0.817
+[Iteration 7500/9600] TRAIN loss: 0.814
+[Iteration 7520/9600] TRAIN loss: 0.790
+[Iteration 7540/9600] TRAIN loss: 0.833
+[Iteration 7560/9600] TRAIN loss: 0.815
+[Iteration 7580/9600] TRAIN loss: 0.802
+[Iteration 7600/9600] TRAIN loss: 0.798
+[Iteration 7620/9600] TRAIN loss: 0.750
+[Iteration 7640/9600] TRAIN loss: 0.871
+[Iteration 7660/9600] TRAIN loss: 0.836
+[Iteration 7680/9600] TRAIN loss: 0.793
+[Epoch 8/10] TRAIN acc/loss: 0.620/0.793
+[Epoch 8/10] VAL   acc/loss: 0.658/1.012
+[Iteration 7700/9600] TRAIN loss: 0.708
+[Iteration 7720/9600] TRAIN loss: 0.704
+[Iteration 7740/9600] TRAIN loss: 0.757
+[Iteration 7760/9600] TRAIN loss: 0.649
+[Iteration 7780/9600] TRAIN loss: 0.642
+[Iteration 7800/9600] TRAIN loss: 0.681
+[Iteration 7820/9600] TRAIN loss: 0.687
+[Iteration 7840/9600] TRAIN loss: 0.744
+[Iteration 7860/9600] TRAIN loss: 0.766
+[Iteration 7880/9600] TRAIN loss: 0.705
+[Iteration 7900/9600] TRAIN loss: 0.715
+[Iteration 7920/9600] TRAIN loss: 0.778
+[Iteration 7940/9600] TRAIN loss: 0.729
+[Iteration 7960/9600] TRAIN loss: 0.780
+[Iteration 7980/9600] TRAIN loss: 0.790
+[Iteration 8000/9600] TRAIN loss: 0.712
+[Iteration 8020/9600] TRAIN loss: 0.725
+[Iteration 8040/9600] TRAIN loss: 0.778
+[Iteration 8060/9600] TRAIN loss: 0.786
+[Iteration 8080/9600] TRAIN loss: 0.764
+[Iteration 8100/9600] TRAIN loss: 0.723
+[Iteration 8120/9600] TRAIN loss: 0.793
+[Iteration 8140/9600] TRAIN loss: 0.783
+[Iteration 8160/9600] TRAIN loss: 0.728
+[Iteration 8180/9600] TRAIN loss: 0.742
+[Iteration 8200/9600] TRAIN loss: 0.748
+[Iteration 8220/9600] TRAIN loss: 0.791
+[Iteration 8240/9600] TRAIN loss: 0.754
+[Iteration 8260/9600] TRAIN loss: 0.746
+[Iteration 8280/9600] TRAIN loss: 0.722
+[Iteration 8300/9600] TRAIN loss: 0.744
+[Iteration 8320/9600] TRAIN loss: 0.760
+[Iteration 8340/9600] TRAIN loss: 0.769
+[Iteration 8360/9600] TRAIN loss: 0.752
+[Iteration 8380/9600] TRAIN loss: 0.780
+[Iteration 8400/9600] TRAIN loss: 0.738
+[Iteration 8420/9600] TRAIN loss: 0.721
+[Iteration 8440/9600] TRAIN loss: 0.770
+[Iteration 8460/9600] TRAIN loss: 0.879
+[Iteration 8480/9600] TRAIN loss: 0.784
+[Iteration 8500/9600] TRAIN loss: 0.787
+[Iteration 8520/9600] TRAIN loss: 0.759
+[Iteration 8540/9600] TRAIN loss: 0.838
+[Iteration 8560/9600] TRAIN loss: 0.764
+[Iteration 8580/9600] TRAIN loss: 0.837
+[Iteration 8600/9600] TRAIN loss: 0.741
+[Iteration 8620/9600] TRAIN loss: 0.758
+[Iteration 8640/9600] TRAIN loss: 0.782
+[Epoch 9/10] TRAIN acc/loss: 0.840/0.782
+[Epoch 9/10] VAL   acc/loss: 0.659/1.035
+[Iteration 8660/9600] TRAIN loss: 0.647
+[Iteration 8680/9600] TRAIN loss: 0.669
+[Iteration 8700/9600] TRAIN loss: 0.676
+[Iteration 8720/9600] TRAIN loss: 0.676
+[Iteration 8740/9600] TRAIN loss: 0.717
+[Iteration 8760/9600] TRAIN loss: 0.693
+[Iteration 8780/9600] TRAIN loss: 0.704
+[Iteration 8800/9600] TRAIN loss: 0.680
+[Iteration 8820/9600] TRAIN loss: 0.614
+[Iteration 8840/9600] TRAIN loss: 0.660
+[Iteration 8860/9600] TRAIN loss: 0.735
+[Iteration 8880/9600] TRAIN loss: 0.694
+[Iteration 8900/9600] TRAIN loss: 0.660
+[Iteration 8920/9600] TRAIN loss: 0.683
+[Iteration 8940/9600] TRAIN loss: 0.731
+[Iteration 8960/9600] TRAIN loss: 0.729
+[Iteration 8980/9600] TRAIN loss: 0.689
+[Iteration 9000/9600] TRAIN loss: 0.687
+[Iteration 9020/9600] TRAIN loss: 0.744
+[Iteration 9040/9600] TRAIN loss: 0.694
+[Iteration 9060/9600] TRAIN loss: 0.704
+[Iteration 9080/9600] TRAIN loss: 0.667
+[Iteration 9100/9600] TRAIN loss: 0.668
+[Iteration 9120/9600] TRAIN loss: 0.727
+[Iteration 9140/9600] TRAIN loss: 0.719
+[Iteration 9160/9600] TRAIN loss: 0.668
+[Iteration 9180/9600] TRAIN loss: 0.764
+[Iteration 9200/9600] TRAIN loss: 0.744
+[Iteration 9220/9600] TRAIN loss: 0.682
+[Iteration 9240/9600] TRAIN loss: 0.749
+[Iteration 9260/9600] TRAIN loss: 0.698
+[Iteration 9280/9600] TRAIN loss: 0.668
+[Iteration 9300/9600] TRAIN loss: 0.741
+[Iteration 9320/9600] TRAIN loss: 0.766
+[Iteration 9340/9600] TRAIN loss: 0.672
+[Iteration 9360/9600] TRAIN loss: 0.737
+[Iteration 9380/9600] TRAIN loss: 0.742
+[Iteration 9400/9600] TRAIN loss: 0.754
+[Iteration 9420/9600] TRAIN loss: 0.708
+[Iteration 9440/9600] TRAIN loss: 0.776
+[Iteration 9460/9600] TRAIN loss: 0.742
+[Iteration 9480/9600] TRAIN loss: 0.754
+[Iteration 9500/9600] TRAIN loss: 0.710
+[Iteration 9520/9600] TRAIN loss: 0.686
+[Iteration 9540/9600] TRAIN loss: 0.728
+[Iteration 9560/9600] TRAIN loss: 0.750
+[Iteration 9580/9600] TRAIN loss: 0.722
+[Iteration 9600/9600] TRAIN loss: 0.759
+[Epoch 10/10] TRAIN acc/loss: 0.680/0.759
+[Epoch 10/10] VAL   acc/loss: 0.639/1.057
+FINISH.
+
+    \end{Verbatim}
+
+    \subsection{Visualize Filters}\label{visualize-filters}
+
+You can visualize the first-layer convolutional filters from the trained
+network by running the following. If your kernel visualizations do not
+exhibit clear structures try optimizing the weight scale:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}8}]:} \PY{k+kn}{from} \PY{n+nn}{exercise\PYZus{}code}\PY{n+nn}{.}\PY{n+nn}{vis\PYZus{}utils} \PY{k}{import} \PY{n}{visualize\PYZus{}grid}
+        
+        \PY{c+c1}{\PYZsh{} first (next) parameter should be convolutional}
+        \PY{n}{conv\PYZus{}params} \PY{o}{=} \PY{n+nb}{next}\PY{p}{(}\PY{n}{model}\PY{o}{.}\PY{n}{parameters}\PY{p}{(}\PY{p}{)}\PY{p}{)}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}\PY{o}{.}\PY{n}{detach}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}
+        \PY{n}{grid} \PY{o}{=} \PY{n}{visualize\PYZus{}grid}\PY{p}{(}\PY{n}{conv\PYZus{}params}\PY{o}{.}\PY{n}{transpose}\PY{p}{(}\PY{l+m+mi}{0}\PY{p}{,} \PY{l+m+mi}{2}\PY{p}{,} \PY{l+m+mi}{3}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{imshow}\PY{p}{(}\PY{n}{grid}\PY{o}{.}\PY{n}{astype}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{uint8}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{axis}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{off}\PY{l+s+s1}{\PYZsq{}}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{gcf}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{set\PYZus{}size\PYZus{}inches}\PY{p}{(}\PY{l+m+mi}{6}\PY{p}{,} \PY{l+m+mi}{6}\PY{p}{)}
+        \PY{n}{plt}\PY{o}{.}\PY{n}{show}\PY{p}{(}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{center}
+    \adjustimage{max size={0.9\linewidth}{0.9\paperheight}}{output_15_0.png}
+    \end{center}
+    { \hspace*{\fill} \\}
+    
+    \section{Test your Model}\label{test-your-model}
+
+Run your best model on the test set. You should easily achieve a score
+above 10\% (random guessing for a classification task with 10 classes)
+accuracy on the given test set:
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}9}]:} \PY{n}{test\PYZus{}loader} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{utils}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{DataLoader}\PY{p}{(}\PY{n}{test\PYZus{}data}\PY{p}{,} \PY{n}{batch\PYZus{}size}\PY{o}{=}\PY{l+m+mi}{50}\PY{p}{,} \PY{n}{shuffle}\PY{o}{=}\PY{k+kc}{False}\PY{p}{,} \PY{n}{num\PYZus{}workers}\PY{o}{=}\PY{l+m+mi}{4}\PY{p}{)}
+        
+        \PY{n}{scores} \PY{o}{=} \PY{p}{[}\PY{p}{]}
+        \PY{n}{model}\PY{o}{.}\PY{n}{eval}\PY{p}{(}\PY{p}{)}
+        \PY{k}{for} \PY{n}{inputs}\PY{p}{,} \PY{n}{targets} \PY{o+ow}{in} \PY{n}{test\PYZus{}loader}\PY{p}{:}
+            \PY{n}{inputs}\PY{p}{,} \PY{n}{targets} \PY{o}{=} \PY{n}{inputs}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}\PY{p}{,} \PY{n}{targets}\PY{o}{.}\PY{n}{to}\PY{p}{(}\PY{n}{device}\PY{p}{)}
+           
+            
+            \PY{n}{outputs} \PY{o}{=} \PY{n}{model}\PY{p}{(}\PY{n}{inputs}\PY{p}{)}
+            \PY{n}{\PYZus{}}\PY{p}{,} \PY{n}{preds} \PY{o}{=} \PY{n}{torch}\PY{o}{.}\PY{n}{max}\PY{p}{(}\PY{n}{outputs}\PY{p}{,} \PY{l+m+mi}{1}\PY{p}{)}
+            \PY{n}{scores}\PY{o}{.}\PY{n}{extend}\PY{p}{(}\PY{p}{(}\PY{n}{preds} \PY{o}{==} \PY{n}{targets}\PY{p}{)}\PY{o}{.}\PY{n}{data}\PY{o}{.}\PY{n}{cpu}\PY{p}{(}\PY{p}{)}\PY{o}{.}\PY{n}{numpy}\PY{p}{(}\PY{p}{)}\PY{p}{)}
+            
+        \PY{n+nb}{print}\PY{p}{(}\PY{l+s+s1}{\PYZsq{}}\PY{l+s+s1}{Test set accuracy: }\PY{l+s+si}{\PYZpc{}f}\PY{l+s+s1}{\PYZsq{}} \PY{o}{\PYZpc{}} \PY{n}{np}\PY{o}{.}\PY{n}{mean}\PY{p}{(}\PY{n}{scores}\PY{p}{)}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Test set accuracy: 0.661000
+
+    \end{Verbatim}
+
+    \subsection{Save the Model}\label{save-the-model}
+
+When you are satisfied with your training, you can save the model.
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+{\color{incolor}In [{\color{incolor}10}]:} \PY{n}{model}\PY{o}{.}\PY{n}{save}\PY{p}{(}\PY{l+s+s2}{\PYZdq{}}\PY{l+s+s2}{models/classification\PYZus{}cnn.model}\PY{l+s+s2}{\PYZdq{}}\PY{p}{)}
+\end{Verbatim}
+
+
+    \begin{Verbatim}[commandchars=\\\{\}]
+Saving model{\ldots} models/classification\_cnn.model
+
+    \end{Verbatim}
+
+    In order to complete this task you have to achieve more than \textbf{58}
+points on the submission website.
+
+    \subsection{Possible Next Steps}\label{possible-next-steps}
+
+\begin{enumerate}
+\def\labelenumi{\arabic{enumi}.}
+\tightlist
+\item
+  Hyperparameter optimization
+\item
+  Data augmentation
+  (\href{http://pytorch.org/tutorials/beginner/data_loading_tutorial.html}{PyTorch
+  tutorial})
+\item
+  Improve your network architecture
+
+  \begin{enumerate}
+  \def\labelenumii{\arabic{enumii}.}
+  \tightlist
+  \item
+    Increase network depth
+  \item
+    Make network convolutional
+  \item
+    Add additional layers such as
+    \href{https://gab41.lab41.org/batch-normalization-what-the-hey-d480039a9e3b\#}{Batch
+    normalization}.
+  \end{enumerate}
+\end{enumerate}
+
+
+    % Add a bibliography block to the postdoc
+    
+    
+    
+    \end{document}
